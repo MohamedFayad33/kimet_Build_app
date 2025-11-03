@@ -14,7 +14,9 @@ class YearRepoImp implements YearRepo {
     required int id,
   }) {
     try {
-      return right(yearLocalDataSource.addBox(newYear, id));
+      Future<void> x = yearLocalDataSource.addBox(newYear, id);
+
+      return right(x);
     } catch (e) {
       return left(Faulier(e.toString()));
     }

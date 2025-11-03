@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:ouhda/core/constant/constants.dart';
 import 'package:ouhda/core/hive_services/hive_names_boxes.dart';
 import 'package:ouhda/feature/home/domain/entities/category_entity.dart';
 import 'package:ouhda/feature/years/domin/entities/month_entity.dart';
@@ -12,5 +13,9 @@ class YearLocalDataSource {
       await item.save();
     }
     await Hive.openBox<MonthEntity>(id.toString());
+    var x = Hive.box<MonthEntity>(id.toString());
+    for (var month in months) {
+      x.put(month, MonthEntity(month: month));
+    }
   }
 }
