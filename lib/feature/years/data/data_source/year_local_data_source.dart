@@ -5,7 +5,7 @@ import 'package:ouhda/feature/home/domain/entities/category_entity.dart';
 import 'package:ouhda/feature/years/domin/entities/month_entity.dart';
 
 class YearLocalDataSource {
-  Future<void> addBox(String newYear, int id) async {
+  Future<List<MonthEntity>> addBox(String newYear, int id) async {
     final box = Hive.box<CategoryEntity>(HiveNamesBoxes.categories);
     final item = box.get(id);
     if (item != null) {
@@ -13,9 +13,10 @@ class YearLocalDataSource {
       await item.save();
     }
     await Hive.openBox<MonthEntity>(id.toString());
-    var x = Hive.box<MonthEntity>(id.toString());
+    Box<MonthEntity> x = Hive.box<MonthEntity>(id.toString());
     for (var month in months) {
       x.put(month, MonthEntity(month: month));
     }
+    return x.values.toList();
   }
 }

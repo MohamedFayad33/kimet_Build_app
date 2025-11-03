@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ouhda/core/constant/faulier.dart';
 import 'package:ouhda/feature/years/data/data_source/year_local_data_source.dart';
+import 'package:ouhda/feature/years/domin/entities/month_entity.dart';
 import 'package:ouhda/feature/years/domin/repository/year_repo.dart';
 
 class YearRepoImp implements YearRepo {
@@ -9,12 +10,12 @@ class YearRepoImp implements YearRepo {
   final YearLocalDataSource yearLocalDataSource;
 
   @override
-  Either<Faulier, Future<void>> addYears({
+  Future<Either<Faulier, List<MonthEntity>>> addYears({
     required String newYear,
     required int id,
-  }) {
+  }) async {
     try {
-      Future<void> x = yearLocalDataSource.addBox(newYear, id);
+      List<MonthEntity> x = await yearLocalDataSource.addBox(newYear, id);
 
       return right(x);
     } catch (e) {
