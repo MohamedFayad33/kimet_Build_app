@@ -10,16 +10,21 @@ class YearRepoImp implements YearRepo {
   final YearLocalDataSource yearLocalDataSource;
 
   @override
-  Future<Either<Faulier, List<MonthEntity>>> addYears({
+  Future<Either<Faulier, void>> addYears({
     required String newYear,
     required int id,
   }) async {
     try {
-      List<MonthEntity> x = await yearLocalDataSource.addBox(newYear, id);
+      void x = await yearLocalDataSource.addBox(newYear, id);
 
       return right(x);
     } catch (e) {
       return left(Faulier(e.toString()));
     }
+  }
+
+  @override
+  Future<List<MonthEntity>> getMonths(String id) async {
+    return await yearLocalDataSource.getMonth(id);
   }
 }

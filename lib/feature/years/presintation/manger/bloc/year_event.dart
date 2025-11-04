@@ -15,3 +15,11 @@ class AddYearEvent extends YearEvent {
   @override
   List<Object> get props => [year, id];
 }
+
+class GetMonthsEvent extends YearEvent {
+  final String id;
+
+  const GetMonthsEvent({required this.id});
+  @override
+  List<Object> get props => [id];
+}

@@ -12,7 +12,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc({required this.homeRepository}) : super(CategoryInitial()) {
     on<GetCategoryEvent>(getCategory);
     on<SaveCategoryEvent>(saveCategory);
-    on<AddYearEvent>(addYears);
+    // on<AddYearEvent>(addYears);
   }
 
   final HomeRepository homeRepository;
@@ -44,17 +44,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(CategorySuccess(myBox.values.toList()));
   }
 
-  FutureOr<void> addYears(AddYearEvent event, Emitter emit) async {
-    final box = Hive.box<CategoryEntity>(HiveNamesBoxes.categories);
-    final item = box.get(event.index);
+  // FutureOr<void> addYears(AddYearEvent event, Emitter emit) async {
+  //   final box = Hive.box<CategoryEntity>(HiveNamesBoxes.categories);
+  //   final item = box.get(event.index);
 
-    if (item != null) {
-      item.years.add(event.year);
-      await item.save();
-    }
-    print(item!.years);
-    try {} catch (e) {
-      print(e);
-    }
-  }
+  //   if (item != null) {
+  //     item.years.add(event.year);
+  //     await item.save();
+  //   }
+  //   print(item!.years);
+  //   try {} catch (e) {
+  //     print(e);
+  //   }
+  // }
 }

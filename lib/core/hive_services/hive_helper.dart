@@ -13,10 +13,10 @@ abstract class HiveHelper {
     Directory dir = await getApplicationDocumentsDirectory();
     await Hive.initFlutter(dir.path);
 
-    Hive.registerAdapter<CategoryEntity>(CategoryEntityAdapter());
-    Hive.registerAdapter<MonthEntity>(MonthEntityAdapter());
-    Hive.registerAdapter<InvoiceEntity>(InvoiceEntityAdapter());
-    Hive.registerAdapter<AwhdaEntity>(AwhdaEntityAdapter());
+    Hive.registerAdapter(CategoryEntityAdapter());
+    Hive.registerAdapter(MonthEntityAdapter());
+    Hive.registerAdapter(InvoiceEntityAdapter());
+    Hive.registerAdapter(AwhdaEntityAdapter());
 
     await Hive.openBox<CategoryEntity>(HiveNamesBoxes.categories);
   }

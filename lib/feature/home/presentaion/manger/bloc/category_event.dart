@@ -15,11 +15,11 @@ class SaveCategoryEvent extends CategoryEvent {
   List<Object?> get props => [category];
 }
 
-class AddYearEvent extends CategoryEvent {
-  final int index;
-  final String year;
+// class AddYearEvent extends CategoryEvent {
+//   final int index;
+//   final String year;
 
-  AddYearEvent({required this.index, required this.year});
-  @override
-  List<Object?> get props => [index, year];
-}
+//   AddYearEvent({required this.index, required this.year});
+//   @override
+//   List<Object?> get props => [index, year];
+// }

@@ -9,12 +9,12 @@ abstract class YearState extends Equatable {
 
 class YearInitial extends YearState {}
 
-class YearSuccess extends YearState {
-  final List<MonthEntity> months;
+class YearLoading extends YearState {}
 
-  const YearSuccess(this.months);
+class YearSuccess extends YearState {
+  const YearSuccess();
   @override
-  List<Object> get props => [months];
+  List<Object> get props => [];
 }
 
 class YearFaulir extends YearState {

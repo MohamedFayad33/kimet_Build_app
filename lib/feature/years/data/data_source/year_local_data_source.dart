@@ -5,18 +5,28 @@ import 'package:ouhda/feature/home/domain/entities/category_entity.dart';
 import 'package:ouhda/feature/years/domin/entities/month_entity.dart';
 
 class YearLocalDataSource {
-  Future<List<MonthEntity>> addBox(String newYear, int id) async {
+  Future<void> addBox(String newYear, int id) async {
     final box = Hive.box<CategoryEntity>(HiveNamesBoxes.categories);
     final item = box.get(id);
     if (item != null) {
       item.years.add(newYear);
       await item.save();
     }
-    await Hive.openBox<MonthEntity>(id.toString());
-    Box<MonthEntity> x = Hive.box<MonthEntity>(id.toString());
+    await Hive.openBox<MonthEntity>('$newYear${id.toString()}');
+    Box<MonthEntity> x = Hive.box<MonthEntity>('$newYear${id.toString()}');
+    x.add(MonthEntity(month: 'hello'));
     for (var month in months) {
-      x.put(month, MonthEntity(month: month));
+      await x.add(MonthEntity(month: month));
     }
-    return x.values.toList();
+  }
+
+  Future<List<MonthEntity>> getMonth(String id) async {
+    if (Hive.isBoxOpen(id)) {
+    } else if (!Hive.isBoxOpen(id)) {
+      await Hive.openBox<MonthEntity>(id);
+    }
+
+    Box<MonthEntity> month = Hive.box<MonthEntity>(id);
+    return month.values.toList();
   }
 }

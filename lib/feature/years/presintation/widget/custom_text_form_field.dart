@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ouhda/feature/home/presentaion/manger/bloc/category_bloc.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField({super.key, required this.index});
-  final int index;
+  const CustomTextFormField({super.key, required this.onTap});
+  final Function(String year) onTap;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -33,25 +31,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextFormField(
-            controller: _controller,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'where is the value ??';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
+          customWidgetTextFormField(),
           const SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
-              _onSave(_controller.text, widget.index);
+              _onSave(_controller.text);
             },
             child: Text('Save'),
           ),
@@ -60,10 +44,25 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
-  void _onSave(String year, int index) {
+  TextFormField customWidgetTextFormField() {
+    return TextFormField(
+      controller: _controller,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'where is the value ??';
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+
+  void _onSave(String year) {
     if (_key.currentState!.validate()) {
-      var x = BlocProvider.of<CategoryBloc>(context);
-      x.add(AddYearEvent(index: index, year: year));
+      widget.onTap(year);
       Navigator.of(context).pop();
     }
   }

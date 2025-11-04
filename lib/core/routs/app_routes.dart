@@ -4,6 +4,7 @@ import 'package:ouhda/feature/awhda/presentaion/view/awhda_view.dart';
 import 'package:ouhda/feature/details/presentaion/view/details_view.dart';
 import 'package:ouhda/feature/home/presentaion/view/home_view.dart';
 import 'package:ouhda/feature/invoices/presentaion/view/invoices_view.dart';
+import 'package:ouhda/feature/years/presintation/month_view.dart';
 import 'package:ouhda/feature/splash/presentaion/view/splash_view.dart';
 import 'package:ouhda/feature/years/presintation/years_view.dart';
 
@@ -20,5 +21,7 @@ abstract class AppRoutes {
     AppRoutsName.invoices: (BuildContext context) => const InvoicesView(),
 
     AppRoutsName.awhda: (BuildContext context) => const AwhdaView(),
+
+    AppRoutsName.monthView: (BuildContext context) => const MonthView(),
   };
 }

@@ -5,4 +5,5 @@ abstract class AppRoutsName {
   static const String invoices = 'invoicesView';
   static const String awhda = 'awhdaView';
   static const String yearsView = 'yearsView';
+  static const String monthView = 'monthView';
 }
